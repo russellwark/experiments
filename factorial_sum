@@ -1,0 +1,16 @@
+function factorial_digits_sum ( N ) {
+    if (N == 0 || N > 100000000) {
+        return -1;
+    } else {
+        product = 1;
+        for (i = 1; i <= N; i++) {
+            product *= i;
+        }
+        var theString = product.toString();
+  	var runningTotal = 0;
+		for (x=0; x<theString.length; x++) {
+			runningTotal += parseInt(theString.charAt(x));	
+		}
+		return runningTotal;
+    }
+}
