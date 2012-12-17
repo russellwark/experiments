@@ -1,0 +1,28 @@
+function max_binary_ones_stretch ( N ) {
+    var inBin = N.toString(2);
+    $("#output").append("<p>Number in binary: "+inBin);
+    maxStretch = 0;
+  finalMax = 0;
+    for (x=0; x<inBin.length; x++ ) {
+        var thePrevChar;
+        currentChar = inBin.charAt(x);
+        //$("#output").append("<p>Position "+x+": "+currentChar + " ");
+  
+		if (currentChar == "1") {
+			  maxStretch++;
+			 // $("#output").append("<p>This is a 1 - current stretch is "+maxStretch+"</p>");               
+		} else {
+			if (finalMax < maxStretch) {
+				finalMax = maxStretch;
+			}
+			//$("#output").append("<p>Hit a 0 - final stretch was "+finalMax+"</p>");   
+			maxStretch = 0;	
+		}
+		
+		thePrevChar = currentChar;
+
+
+    }
+    
+    return finalMax;
+}
