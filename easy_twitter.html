@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Twitter Test</title>
+<style type="text/css">
+body {
+  font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;	
+}
+
+#searchcontainer {
+	width: 400px;
+	padding: 12px;
+	margin: 4px;
+	background-color: #ddd;
+	border: 1px solid #aaa;	
+}
+
+.tweet {
+	width: 400px;
+	padding: 12px;
+	margin: 4px;
+	border: 1px solid #ddd;	
+}
+
+.tweet .userimage {
+	padding: 4px;
+	float: left;	
+}
+
+.tweet .author {
+	font-weight: bold;	
+}
+</style>
+</head>
+
+<body>
+<div id="searchcontainer">
+	<label for="searchbox">Please enter search term: </label>
+    <input id="searchbox" name="searchbox" type="text">
+    <input type="submit" id="search" value="Search">
+</div>
+<div id="tweet_stream">
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+$("#search").click(function() {
+	var theSearchString = $("#searchbox").val();
+	//console.log ("searching twitter for "+$("#searchbox").val());
+	var script=document.createElement('script');
+	script.type='text/javascript';
+	script.src= "https://search.twitter.com/search.json?q="+encodeURIComponent(theSearchString)+"&callback=doTweets";
+	$("body").append(script);
+});
+
+function doTweets(jsonData){
+	//console.log("doing tweets");
+	var theOutput = '';
+	var results = jsonData.results;
+	if (results){
+	$.each(results, function(index,value){
+		theOutput += "<div class='tweet'><img src='"+value.profile_image_url+"' class='userimage'><p class='title'><span class='author'>" + value.from_user + "</span>: " +
+		value.text + "<span class='date'>" + value.created_at + "</span></p></div>";
+	});
+	
+	// Load the HTML in the #tweet_stream div
+	$("#tweet_stream").html(theOutput);
+	}
+
+}
+</script>
+</body>
+</html>
