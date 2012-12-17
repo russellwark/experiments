@@ -1,0 +1,25 @@
+function heavy_decimal_count ( A,B ) {
+  var heavyNumberCount = 0;
+    for (x=A; x <= B; x++ ) {
+		$("#output").append("<p>Current number: "+A+"</p>");   
+		var theString = x.toString();
+		var finalNumber = 0;
+		var itemCounter = 0;
+		var tempFinal = 0;
+		for (y=0; y<theString.length; y++) {
+			tempFinal +=parseInt(theString.charAt(y));
+			itemCounter++;
+		}
+		finalNumber = parseFloat(tempFinal / itemCounter);
+		
+		$("#output").append("<p>Final number for group: "+finalNumber+"</p>");    
+		if (parseFloat(finalNumber) > 7 ) {
+			heavyNumberCount++;	
+		}
+		tempFinal = 0;
+		itemCounter = 0;
+		finalNumber = 0;
+	}
+	
+	return heavyNumberCount;
+}
